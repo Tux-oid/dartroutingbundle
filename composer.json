@@ -1,0 +1,23 @@
+{
+    "name":         "rl/dartroutingbundle",
+    "description":  "Symfony RLDartRoutingBundle",
+    "type":         "symfony-bundle",
+    "keywords":     ["dart", "routing"],
+    "license":      "BSDL",
+    "homepage":     "https://gitorious.org/rulinux-engine/dartroutingbundle",
+    "authors":      [
+        {
+            "name":     "Peter Vasilevsky a.k.a. Tux-oid.",
+            "homepage": "http://rulinux.net"
+        }
+    ],
+    "autoload":     {
+        "psr-0": { "RL\\DartRoutingBundle": "" }
+    },
+    "target-dir": "RL/DartRoutingBundle",
+    "require":{
+        "php":">=5.3.3",
+        "symfony/framework-bundle": "2.*",
+        "symfony/console": "2.*"
+    }
+}

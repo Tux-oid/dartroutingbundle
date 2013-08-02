@@ -1,0 +1,7 @@
+parameters:
+    rl_dart_routing.routes_extractor.class: RL\DartRoutingBundle\Extractor\RoutesExtractor
+
+services:
+    rl_dart_routing.routes_extractor:
+        class: %rl_dart_routing.routes_extractor.class%
+        arguments: [@router, %rl_dart_routing.routes.filename%, %rl_dart_routing.routes.exposed_routes%]
