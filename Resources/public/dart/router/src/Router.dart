@@ -1,4 +1,3 @@
-<?php
 /**
  * Copyright (c) 2013, Peter Vasilevsky
  * All rights reserved.
@@ -26,39 +25,30 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+part of routing;
 
 /**
- * RL\DartRoutingBundle\Extractor\Route
- *
- * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
- */
-class Route 
-{
-    /**
-     * @var string
-     */
-    public $name;
+* Router generator
+*/
 
-    /**
-     * @var array
-     */
-    public $requirements;
+class Router {
 
-    /**
-     * @var array
-     */
-    public $defaults;
+    static final Router _router = new Router._internal();
 
-    /**
-     * @var array
-     */
-    public $tokens;
+    List<Object> routes;
 
-    /**
-     * @var array
-     */
-    public $variables;
+    factory Router() {
+        return _router;
+    }
+
+    Router._internal();
+
+    void readRoutes() {
+        this.routes = parse(FilesystemHelper.readFile('web/bundles/rl_dart_routing/dart/dart_routes.json'));
+    }
 
 
+    String _generate(String name, params, ReferenceTypes referenceType) {
+        
+    }
 }

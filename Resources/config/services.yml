@@ -4,4 +4,4 @@ parameters:
 services:
     rl_dart_routing.routes_extractor:
         class: %rl_dart_routing.routes_extractor.class%
-        arguments: [@router, %rl_dart_routing.routes.filename%]
+        arguments: [@router]

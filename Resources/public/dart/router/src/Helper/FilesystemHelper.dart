@@ -1,4 +1,3 @@
-<?php
 /**
  * Copyright (c) 2013, Peter Vasilevsky
  * All rights reserved.
@@ -26,39 +25,25 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+part of routing;
 
-/**
- * RL\DartRoutingBundle\Extractor\Route
- *
- * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
- */
-class Route 
-{
-    /**
-     * @var string
-     */
-    public $name;
+class FilesystemHelper {
 
-    /**
-     * @var array
-     */
-    public $requirements;
+    static String readFile(String path) {
+        if (Uri.parse(path).host == '') {
+            var host = window.location.protocol + '//' + window.location.hostname;
+            if (path.substring(0, 1) != '/') {
+                host += '/';
+            }
+            path = host + path;
+        }
+        var request = new HttpRequest();
+        request.open('POST', path, async: false);
+        request.send(null);
+        String str = request.responseText;
 
-    /**
-     * @var array
-     */
-    public $defaults;
-
-    /**
-     * @var array
-     */
-    public $tokens;
-
-    /**
-     * @var array
-     */
-    public $variables;
-
+        return str;
+    }
 
 }
+

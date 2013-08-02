@@ -43,37 +43,43 @@ class RoutesExtractor implements RoutesExtractorInterface
     protected $router;
 
     /**
-     * @var string
-     */
-    protected $filename;
-
-    /**
      * Constructor
      *
      * @param Router $router
-     * @param $filename
      */
-    public function __construct(Router $router, $filename)
+    public function __construct(Router $router)
     {
         $this->router = $router;
-        $this->filename = $filename;
     }
 
     /**
-     * @return void
+     * {@inheritdoc}
      */
     public function extract()
     {
+        $extractedRoutes = array();
         $routes = $this->router->getRouteCollection()->all();
         foreach ($routes as $name => $route) {
             $compiledRoute = $route->compile();
+            $defaults = array();
+            foreach ($compiledRoute->getVariables() as $variable) {
+                $routeDefaults = $route->getDefaults();
+                if (array_key_exists($variable, $routeDefaults)) {
+                    $defaults[$variable] = $routeDefaults[$variable];
+                }
+            }
             $expose = $route->getOption('expose');
             if ($expose) {
-                $extractedRoute= new Route();
+                $extractedRoute = new Route();
                 $extractedRoute->name = $name;
                 $extractedRoute->requirements = $route->getRequirements();
-
+                $extractedRoute->tokens = $compiledRoute->getTokens();
+                $extractedRoute->defaults = $defaults;
+                $extractedRoute->variables = $compiledRoute->getVariables();
+                $extractedRoutes[] = $extractedRoute;
             }
         }
+
+        return $extractedRoutes;
     }
 }

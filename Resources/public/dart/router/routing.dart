@@ -1,4 +1,3 @@
-<?php
 /**
  * Copyright (c) 2013, Peter Vasilevsky
  * All rights reserved.
@@ -26,39 +25,25 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+library routing;
 
-/**
- * RL\DartRoutingBundle\Extractor\Route
- *
- * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
- */
-class Route 
+import 'dart:core';
+import 'dart:json';
+
+part 'src/Helper/FilesystemHelper.dart';
+part 'src/Router.dart';
+part 'src/ReferenceTypes.dart';
+
+String path(String name, params)
 {
-    /**
-     * @var string
-     */
-    public $name;
+    _generate(name, params, ReferenceTypes.RELATIVE_PATH);
+}
 
-    /**
-     * @var array
-     */
-    public $requirements;
+String url(String name, params)
+{
+    _generate(name, params, ReferenceTypes.ABSOLUTE_PATH);
+}
 
-    /**
-     * @var array
-     */
-    public $defaults;
-
-    /**
-     * @var array
-     */
-    public $tokens;
-
-    /**
-     * @var array
-     */
-    public $variables;
-
+void main() {
 
 }

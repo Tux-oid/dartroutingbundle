@@ -1,4 +1,3 @@
-<?php
 /**
  * Copyright (c) 2013, Peter Vasilevsky
  * All rights reserved.
@@ -26,39 +25,19 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+part of routing;
 
 /**
- * RL\DartRoutingBundle\Extractor\Route
- *
- * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
- */
-class Route 
-{
-    /**
-     * @var string
-     */
-    public $name;
+* Reference types enumeration
+*/
+class ReferenceTypes {
+    static const RELATIVE_PATH = const ReferenceTypes._(1);
 
-    /**
-     * @var array
-     */
-    public $requirements;
+    static const ABSOLUTE_PATH = const ReferenceTypes._(0);
 
-    /**
-     * @var array
-     */
-    public $defaults;
+    final int value;
 
-    /**
-     * @var array
-     */
-    public $tokens;
+    const ReferenceTypes._(this.value);
 
-    /**
-     * @var array
-     */
-    public $variables;
-
-
+    static get values => [RELATIVE_PATH, ABSOLUTE_PATH];
 }

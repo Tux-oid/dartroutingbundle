@@ -36,7 +36,7 @@ namespace RL\DartRoutingBundle\Extractor;
 interface RoutesExtractorInterface
 {
     /**
-     * @return void
+     * @return array
      */
     public function extract();
 }

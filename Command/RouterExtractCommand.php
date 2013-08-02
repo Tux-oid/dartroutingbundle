@@ -58,7 +58,12 @@ class RouterExtractCommand extends ContainerAwareCommand
     {
         /** @var $extractor \RL\DartRoutingBundle\Extractor\RoutesExtractorInterface */
         $extractor = $this->getContainer()->get('rl_dart_routing.routes_extractor');
-        $extractor->extract();
+        file_put_contents(
+            $this->getContainer()->get('kernel')->locateResource(
+                '@RLDartRoutingBundle/Resources/public/dart/dart_routes.json'
+            ),
+            json_encode($extractor->extract())
+        );
         $output->writeln('Done.');
     }
 }

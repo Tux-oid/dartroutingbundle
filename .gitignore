@@ -4,3 +4,4 @@ composer.lock
 .idea
 access.log
 error.log
+*.dart.js*

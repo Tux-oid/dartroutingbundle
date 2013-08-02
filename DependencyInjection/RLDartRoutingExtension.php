@@ -50,6 +50,5 @@ class RLDartRoutingExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-        $container->setParameter('rl_dart_routing.routes.filename', $config['routes']['filename']);
     }
 }
