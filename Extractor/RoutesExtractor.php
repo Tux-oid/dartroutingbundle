@@ -29,7 +29,6 @@
 namespace RL\DartRoutingBundle\Extractor;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use RL\DartRoutingBundle\Route\Route;
 
 /**
  * RL\DartRoutingBundle\Extractor\RoutesExtractor
@@ -49,22 +48,15 @@ class RoutesExtractor implements RoutesExtractorInterface
     protected $filename;
 
     /**
-     * @var array
-     */
-    protected $exposedRoutes;
-
-    /**
      * Constructor
      *
      * @param Router $router
      * @param $filename
-     * @param array $exposedRoutes
      */
-    public function __construct(Router $router, $filename, array $exposedRoutes)
+    public function __construct(Router $router, $filename)
     {
         $this->router = $router;
         $this->filename = $filename;
-        $this->exposedRoutes = $exposedRoutes;
     }
 
     /**
@@ -74,9 +66,13 @@ class RoutesExtractor implements RoutesExtractorInterface
     {
         $routes = $this->router->getRouteCollection()->all();
         foreach ($routes as $name => $route) {
-            if (in_array($name, $this->exposedRoutes)) {
-                $route= new Route();
-                $route->name = $name;
+            $compiledRoute = $route->compile();
+            $expose = $route->getOption('expose');
+            if ($expose) {
+                $extractedRoute= new Route();
+                $extractedRoute->name = $name;
+                $extractedRoute->requirements = $route->getRequirements();
+
             }
         }
     }

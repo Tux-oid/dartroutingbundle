@@ -26,10 +26,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Route;
+namespace RL\DartRoutingBundle\Extractor;
 
 /**
- * RL\DartRoutingBundle\Route\Route
+ * RL\DartRoutingBundle\Extractor\Route
  *
  * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
  */
@@ -43,7 +43,12 @@ class Route
     /**
      * @var array
      */
-    public $params;
+    public $requirements;
+
+    /**
+     * @var array
+     */
+    public $defaults;
 
 
 }

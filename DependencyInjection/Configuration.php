@@ -51,9 +51,6 @@ class Configuration implements ConfigurationInterface
                 ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('filename')->defaultValue('routes.json')->end()
-                        ->arrayNode('exposed_routes')
-                            ->prototype('scalar')
-                        ->end()
                     ->end()
                 ->end()
             ->end();
