@@ -46,6 +46,11 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('rl_dart_routing');
 
+        $rootNode->children()
+                ->scalarNode('type')->defaultValue('dynamic')->end()
+                ->scalarNode('routes_json_file')->defaultValue('web/dart_routes.json')->end()
+                ->end();
+
         return $treeBuilder;
     }
 }

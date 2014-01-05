@@ -1,0 +1,4 @@
+_routes_list:
+    pattern:  /routes
+    defaults: { _controller: RLDartRoutingBundle:Routes:list }
+    methods:  [POST]

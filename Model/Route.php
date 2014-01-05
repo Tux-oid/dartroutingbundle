@@ -26,31 +26,47 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\DependencyInjection;
-
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
+namespace RL\DartRoutingBundle\Model;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * RL\DartRoutingBundle\Model\Route
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
  */
-class RLDartRoutingExtension extends Extension
+class Route 
 {
     /**
-     * {@inheritDoc}
+     * @var string
      */
-    public function load(array $configs, ContainerBuilder $container)
-    {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+    public $name;
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
-        $container->setParameter($this->getAlias() . '.type', $config['type']);
-        $container->setParameter($this->getAlias() . '.routes_json_file', $config['routes_json_file']);
-    }
+    /**
+     * @var array
+     */
+    public $requirements;
+
+    /**
+     * @var array
+     */
+    public $defaults;
+
+    /**
+     * @var array
+     */
+    public $tokens;
+
+    /**
+     * @var array
+     */
+    public $variables;
+
+    /**
+     * @var string
+     */
+    public $host;
+
+    /**
+     * @var string
+     */
+    public $schemes;
 }

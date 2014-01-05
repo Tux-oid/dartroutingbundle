@@ -26,12 +26,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+namespace RL\DartRoutingBundle\Service;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use RL\DartRoutingBundle\Model\Route;
 
 /**
- * RL\DartRoutingBundle\Extractor\RoutesExtractor
+ * RL\DartRoutingBundle\Service\RoutesExtractor
  *
  * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
  */
@@ -60,22 +61,23 @@ class RoutesExtractor implements RoutesExtractorInterface
         $extractedRoutes = array();
         $routes = $this->router->getRouteCollection()->all();
         foreach ($routes as $name => $route) {
-            $compiledRoute = $route->compile();
-            $defaults = array();
-            foreach ($compiledRoute->getVariables() as $variable) {
-                $routeDefaults = $route->getDefaults();
-                if (array_key_exists($variable, $routeDefaults)) {
-                    $defaults[$variable] = $routeDefaults[$variable];
+            if (true === $route->getOption('expose')) {
+                $compiledRoute = $route->compile();
+                $defaults = array();
+                foreach ($compiledRoute->getVariables() as $variable) {
+                    $routeDefaults = $route->getDefaults();
+                    if (array_key_exists($variable, $routeDefaults)) {
+                        $defaults[$variable] = $routeDefaults[$variable];
+                    }
                 }
-            }
-            $expose = $route->getOption('expose');
-            if ($expose) {
                 $extractedRoute = new Route();
                 $extractedRoute->name = $name;
                 $extractedRoute->requirements = $route->getRequirements();
-                $extractedRoute->tokens = $compiledRoute->getTokens();
+                $extractedRoute->tokens = array_reverse($compiledRoute->getTokens());
                 $extractedRoute->defaults = $defaults;
                 $extractedRoute->variables = $compiledRoute->getVariables();
+                $extractedRoute->host = "" !== $route->getHost() ? $route->getHost() : $this->router->getContext()->getHost();
+                $extractedRoute->schemes = $route->getSchemes();
                 $extractedRoutes[] = $extractedRoute;
             }
         }

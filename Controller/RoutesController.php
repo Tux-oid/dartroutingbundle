@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2013, Peter Vasilevsky
+ * Copyright (c) 2014, Peter Vasilevsky
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,39 +26,34 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+namespace RL\DartRoutingBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use RL\DartRoutingBundle\Service\RoutesExtractorInterface;
 
 /**
- * RL\DartRoutingBundle\Extractor\Route
+ * RL\DartRoutingBundle\Controller\RoutesController
  *
  * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
+ * @license BSDL
  */
-class Route 
+class RoutesController extends Controller
 {
-    /**
-     * @var string
-     */
-    public $name;
+    public function listAction()
+    {
+        $container = $this->get('service_container');
+        /** @var $extractor RoutesExtractorInterface */
+        $extractor = $container->get('rl_dart_routing.routes_extractor');
+        $type = $container->getParameter('rl_dart_routing.type');
+        $data['type'] = $type;
+        if($type === 'dynamic'){
+            $data['routes'] = $extractor->extract();
+        } else {
+            $path = $container->getParameter('rl_dart_routing.routes_json_file');
+            $data['path'] = $path;
+        }
 
-    /**
-     * @var array
-     */
-    public $requirements;
-
-    /**
-     * @var array
-     */
-    public $defaults;
-
-    /**
-     * @var array
-     */
-    public $tokens;
-
-    /**
-     * @var array
-     */
-    public $variables;
-
-
-}
+        return new Response(json_encode($data));
+    }
+} 

@@ -28,7 +28,9 @@
 library routing;
 
 import 'dart:core';
-import 'dart:json';
+import 'dart:convert';
+import 'dart:html';
+import "dart:collection";
 
 part 'src/Helper/FilesystemHelper.dart';
 part 'src/Router.dart';
@@ -36,14 +38,17 @@ part 'src/ReferenceTypes.dart';
 
 String path(String name, params)
 {
-    _generate(name, params, ReferenceTypes.RELATIVE_PATH);
+    Router router = new Router();
+    return router._generate(name, params, ReferenceTypes.RELATIVE_PATH);
 }
 
 String url(String name, params)
 {
-    _generate(name, params, ReferenceTypes.ABSOLUTE_PATH);
+    Router router = new Router();
+    return router._generate(name, params, ReferenceTypes.WEB_PATH);
 }
 
-void main() {
+void main()
+{
 
 }

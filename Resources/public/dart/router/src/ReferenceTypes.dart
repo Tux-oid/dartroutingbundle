@@ -33,11 +33,11 @@ part of routing;
 class ReferenceTypes {
     static const RELATIVE_PATH = const ReferenceTypes._(1);
 
-    static const ABSOLUTE_PATH = const ReferenceTypes._(0);
+    static const WEB_PATH = const ReferenceTypes._(0);
 
     final int value;
 
     const ReferenceTypes._(this.value);
 
-    static get values => [RELATIVE_PATH, ABSOLUTE_PATH];
+    static get values => [RELATIVE_PATH, WEB_PATH];
 }

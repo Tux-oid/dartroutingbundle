@@ -1,1 +1,0 @@
-[{"name":"index_route","requirements":[],"defaults":[],"tokens":[["text","\/default\/"]],"variables":[]},{"name":"test_route","requirements":{"name":"[0-9]*"},"defaults":{"name":777},"tokens":[["variable","\/","[0-9]*","name"],["text","\/default\/test"]],"variables":["name"]}]

@@ -26,10 +26,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace RL\DartRoutingBundle\Extractor;
+namespace RL\DartRoutingBundle\Service;
 
 /**
- * RL\DartRoutingBundle\Extractor\RoutesExtractorInterface
+ * RL\DartRoutingBundle\Service\RoutesExtractorInterface
  *
  * @author Peter Vasilevsky <tuxoiduser@gmail.com> a.k.a. Tux-oid
  */

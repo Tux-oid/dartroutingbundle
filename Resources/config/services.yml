@@ -1,5 +1,5 @@
 parameters:
-    rl_dart_routing.routes_extractor.class: RL\DartRoutingBundle\Extractor\RoutesExtractor
+    rl_dart_routing.routes_extractor.class: RL\DartRoutingBundle\Service\RoutesExtractor
 
 services:
     rl_dart_routing.routes_extractor:

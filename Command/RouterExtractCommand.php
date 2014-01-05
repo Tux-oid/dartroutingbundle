@@ -32,6 +32,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use RL\DartRoutingBundle\Service\RoutesExtractorInterface;
 
 /**
  * RL\DartRoutingBundle\Command\RouterExtractCommand
@@ -56,14 +57,14 @@ class RouterExtractCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var $extractor \RL\DartRoutingBundle\Extractor\RoutesExtractorInterface */
+        /** @var $extractor RoutesExtractorInterface */
         $extractor = $this->getContainer()->get('rl_dart_routing.routes_extractor');
-        file_put_contents(
-            $this->getContainer()->get('kernel')->locateResource(
-                '@RLDartRoutingBundle/Resources/public/dart/dart_routes.json'
-            ),
-            json_encode($extractor->extract())
-        );
+        $path = $this->getContainer()->getParameter('kernel.root_dir') .
+                DIRECTORY_SEPARATOR .
+                '..' .
+                DIRECTORY_SEPARATOR .
+                $this->getContainer()->getParameter('rl_dart_routing.routes_json_file');
+        file_put_contents($path, json_encode($extractor->extract()));
         $output->writeln('Done.');
     }
 }
