@@ -8,7 +8,7 @@ RL Dart Routing Bundle. Inspired by FOSJsRoutingBundle.
 At first you should add dependency to your `composer.json`. For this run
 
 ```bash
-    composer.phar require rl\dartroutingbundle:dev-master
+    composer.phar require rl/dartroutingbundle:dev-master
 ```
 
 Then register new bundle in `AppKernel.php`. Just add the following line
