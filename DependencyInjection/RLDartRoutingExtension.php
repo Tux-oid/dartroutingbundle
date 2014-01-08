@@ -28,6 +28,7 @@
 
 namespace RL\DartRoutingBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -47,10 +48,24 @@ class RLDartRoutingExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $config = $this->validateParameters($config);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $container->setParameter($this->getAlias() . '.type', $config['type']);
         $container->setParameter($this->getAlias() . '.routes_json_file', $config['routes_json_file']);
+    }
+
+    /**
+     * @param array $config
+     * @return array
+     */
+    public function validateParameters(array $config)
+    {
+        if ($config['type'] !== 'static' || $config['type'] !== 'dynamic') {
+            $config['type'] = 'dynamic';
+        }
+
+        return $config;
     }
 }

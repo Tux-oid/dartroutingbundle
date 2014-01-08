@@ -70,7 +70,7 @@ If yow want to use some route from your frontend Dart application you should set
 
 ```php
     /**
-     * @Route("/test/{$testParam}", name="test", options = {"expose" = true})
+     * @Route("/test/{testParam}", name="test", options = {"expose" = true})
      * @param $testParam
      */
     public function testAction($testParam)
