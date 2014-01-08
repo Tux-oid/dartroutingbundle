@@ -43,14 +43,11 @@ class Router {
 
     Router._internal()
     {
-        var request = new HttpRequest();
-        request.open('POST', '/rl_dart_routing/routes', async: false);
-        request.send(null);
-        var responce = JSON.decode(request.responseText);
+        var responce = JSON.decode(this._getDataByUrl('/rl_dart_routing/routes'));
         if (responce['type'] == 'dynamic') {
             this.routes = responce['routes'];
         } else {
-            this.routes = JSON.decode(FilesystemHelper.readFile(responce['path']));
+            this.routes = JSON.decode(this._getDataByUrl(responce['path']));
         }
 
     }
@@ -132,5 +129,21 @@ class Router {
         }
 
         return url;
+    }
+
+    String _getDataByUrl(String path) {
+        if (Uri.parse(path).host == '') {
+            var host = window.location.protocol + '//' + window.location.hostname;
+            if (path.substring(0, 1) != '/') {
+                host += '/';
+            }
+            path = host + path;
+        }
+        var request = new HttpRequest();
+        request.open('POST', path, async: false);
+        request.send(null);
+        String str = request.responseText;
+
+        return str;
     }
 }

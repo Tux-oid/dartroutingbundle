@@ -30,7 +30,7 @@ library routing;
 import 'dart:core';
 import 'dart:convert';
 import 'dart:html';
-import "dart:collection";
+import 'dart:collection';
 
 part 'src/Helper/FilesystemHelper.dart';
 part 'src/Router.dart';
