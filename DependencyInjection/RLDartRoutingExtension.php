@@ -62,7 +62,7 @@ class RLDartRoutingExtension extends Extension
      */
     public function validateParameters(array $config)
     {
-        if ($config['type'] !== 'static' || $config['type'] !== 'dynamic') {
+        if ($config['type'] !== 'static' && $config['type'] !== 'dynamic') {
             $config['type'] = 'dynamic';
         }
 
