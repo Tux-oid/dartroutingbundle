@@ -93,11 +93,13 @@ class Router {
         {
             for (var variable in route['variables']) {
                 if (variable == key) {
-                    if (route['requirements'].containsKey(key)) {
-                        var regExpPattern = route['requirements'][key];
-                        RegExp regExp = new RegExp(regExpPattern);
-                        if (!regExp.hasMatch(value.toString())) {
-                            throw new Exception('Incorrect value ' + value + ' of ' + key + ' variable.');
+                    if(false == route['requirements'].isEmpty){
+                        if (route['requirements'].containsKey(key)) {
+                            var regExpPattern = route['requirements'][key];
+                            RegExp regExp = new RegExp(regExpPattern);
+                            if (!regExp.hasMatch(value.toString())) {
+                                throw new Exception('Incorrect value ' + value + ' of ' + key + ' variable.');
+                            }
                         }
                     }
                     return;
@@ -106,9 +108,11 @@ class Router {
             throw new Exception('Unknown variable ' + key);
         }));
         for (var variable in route['variables']) {
-            if (!route['defaults'].containsKey(variable)) {
-                if (!params.containsKey(variable)) {
-                    throw new Exception('Variable ' + variable + ' is mandatory.');
+            if(false == route['defaults'].isEmpty){
+                if (!route['defaults'].containsKey(variable)) {
+                    if (!params.containsKey(variable)) {
+                        throw new Exception('Variable ' + variable + ' is mandatory.');
+                    }
                 }
             }
         }
