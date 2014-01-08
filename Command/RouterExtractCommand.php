@@ -60,10 +60,12 @@ class RouterExtractCommand extends ContainerAwareCommand
         /** @var $extractor RoutesExtractorInterface */
         $extractor = $this->getContainer()->get('rl_dart_routing.routes_extractor');
         $path = $this->getContainer()->getParameter('kernel.root_dir') .
-                DIRECTORY_SEPARATOR .
-                '..' .
-                DIRECTORY_SEPARATOR .
-                $this->getContainer()->getParameter('rl_dart_routing.routes_json_file');
+            DIRECTORY_SEPARATOR .
+            '..' .
+            DIRECTORY_SEPARATOR .
+            'web' .
+            DIRECTORY_SEPARATOR .
+            $this->getContainer()->getParameter('rl_dart_routing.routes_json_file');
         file_put_contents($path, json_encode($extractor->extract()));
         $output->writeln('Done.');
     }

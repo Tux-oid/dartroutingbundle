@@ -48,7 +48,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
                 ->scalarNode('type')->defaultValue('dynamic')->end()
-                ->scalarNode('routes_json_file')->defaultValue('web/dart_routes.json')->end()
+                ->scalarNode('routes_json_file')->defaultValue('dart_routes.json')->end()
                 ->end();
 
         return $treeBuilder;

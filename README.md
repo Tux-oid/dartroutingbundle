@@ -59,7 +59,7 @@ But if yow want to use static json file you should add the following to your con
 ```yaml
 rl_dart_routing:
   type: static #it can be static or dynamic. By default this parameter set as dynamic
-  routes_json_file: relative/path/to/the/file/with/routes/info.json #by default the path is web/dart_routes.json
+  routes_json_file: relative/path/to/the/file/with/routes/info.json #by default the path is dart_routes.json
 ```
 
 and then generate this file by the `php app/console rl:router:extract` command.
